@@ -1,0 +1,29 @@
+name: Orca Image Scan - Caller
+on:
+  push:
+    branches:
+      - master
+      - main
+  pull_request:
+    branches:
+      - master
+      - main
+
+  workflow_dispatch:
+
+permissions: 
+  contents: read
+  checks: write
+  issues: write
+  pull-requests: write
+  security-events: write
+  statuses: write
+  
+jobs:
+  Scan:
+    uses: rahg0/image-scan-reusable-workflow/.github/workflows/orca-image-scan.yml@main
+    with:
+      project_key: slrk
+      dockerfile-details: './Dockerfile'
+      image_name: raghuesh/image-scan-ci-parent-workflow
+    secrets: inherit
